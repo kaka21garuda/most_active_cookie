@@ -1,0 +1,25 @@
+#! /usr/bin/env python
+from CookieHistory import CookieHistory
+from argparse import ArgumentParser
+
+def handleCLIParsing():
+    parser = ArgumentParser()
+    parser.add_argument("csv_filename", help="the log file in .csv form")
+    parser.add_argument("-d", "--date", action="store_true", help="enter '-d' before entering a date")
+    parser.add_argument("date", help="the date to search a cookie")
+
+    args = parser.parse_args()
+    file = args.csv_filename
+    date = args.date
+    ch = CookieHistory(file)
+    for active_cookie in ch.lookForMostActive(date):
+        print(active_cookie)
+
+
+
+def main():
+    handleCLIParsing()
+
+
+if __name__ == '__main__':
+    main()
